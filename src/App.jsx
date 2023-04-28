@@ -12,6 +12,7 @@ import {
 import { Alchemy, Network, Utils } from 'alchemy-sdk';
 import { useState } from 'react';
 
+
 function App() {
   const [userAddress, setUserAddress] = useState('');
   const [results, setResults] = useState([]);
@@ -20,7 +21,7 @@ function App() {
 
   async function getTokenBalance() {
     const config = {
-      apiKey: '<-- COPY-PASTE YOUR ALCHEMY API KEY HERE -->',
+      apiKey: '',
       network: Network.ETH_MAINNET,
     };
 
@@ -88,22 +89,23 @@ function App() {
               return (
                 <Flex
                   flexDir={'column'}
+                  align={'center'}
                   color="white"
-                  bg="blue"
+                  bg='#042940'
                   w={'20vw'}
-                  key={e.id}
+                  key={e.contractAddress}
                 >
-                  <Box>
+                  <Box padding={'8'}>
                     <b>Symbol:</b> ${tokenDataObjects[i].symbol}&nbsp;
                   </Box>
-                  <Box>
+                  <Box padding={'8'}>
                     <b>Balance:</b>&nbsp;
                     {Utils.formatUnits(
                       e.tokenBalance,
                       tokenDataObjects[i].decimals
                     )}
                   </Box>
-                  <Image src={tokenDataObjects[i].logo} />
+                  <Image w={'8vw'} paddingTop={'8'} paddingBottom={'20'} src={tokenDataObjects[i].logo ? tokenDataObjects[i].logo : 'https://picsum.photos/120/120'} />
                 </Flex>
               );
             })}
